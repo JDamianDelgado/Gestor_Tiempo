@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
 from app.database.base import Base
 from app.database.connection import engine
 from sqlalchemy import text
@@ -13,7 +14,7 @@ from app.auth.routes import router as auth_router
 app = FastAPI()
 from dotenv import load_dotenv
 import os
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 URL_FRONTEND=os.getenv("URL_FRONTEND")
 allowed_origins = [

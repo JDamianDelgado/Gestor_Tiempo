@@ -1,10 +1,11 @@
 import os 
+from pathlib import Path
 
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
 DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv("DB_PORT")

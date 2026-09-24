@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import "./App.css";
-import { API_URL, THEME_STORAGE_KEY, TOKEN_STORAGE_KEY } from "./config";
+
+const API_URL = (import.meta.env.VITE_API_URL || "/api").replace(/\/+$/, "");
+const TOKEN_STORAGE_KEY =
+  import.meta.env.VITE_TOKEN_KEY || "alcla_access_token";
+const THEME_STORAGE_KEY = import.meta.env.VITE_THEME_KEY || "alcla_dark_mode";
 
 type Paciente = {
   nombre_ingreso: string;
