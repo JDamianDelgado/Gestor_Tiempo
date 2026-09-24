@@ -11,10 +11,14 @@ from app.routes.actividad import router as actividad_router
 from app.routes.pacientes import router as paciente_router
 from app.auth.routes import router as auth_router
 app = FastAPI()
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
+URL_FRONTEND=os.getenv("URL_FRONTEND")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173",URL_FRONTEND],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
