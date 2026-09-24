@@ -3,8 +3,8 @@ import type { FormEvent } from "react";
 import "./App.css";
 
 const API_URL = import.meta.env.VITE_API_URL || "/api";
-const TOKEN_KEY = "alcla_access_token";
-const THEME_KEY = "alcla_dark_mode";
+const TOKEN_KEY = import.meta.env.VITE_TOKEN_KEY;
+const THEME_KEY = import.meta.env.VITE_THEME_KEY;
 
 type Paciente = {
   nombre_ingreso: string;

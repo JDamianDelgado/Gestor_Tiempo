@@ -6,15 +6,21 @@ from sqlalchemy.orm import Session
 from pydantic import ValidationError
 from datetime import datetime
 from app.schemas.pacientes import paciente_response, paciente_filtrado
+from dotenv import load_dotenv
+import os
+import json
+load_dotenv()
 
-CREDENTIALS_FILE = Path(__file__).resolve().parents[2] / "credentials" / "google-credentials.json"
+google_credentials= os.getenv("GOOGLE_CREDENTIALS_JSON")
+
+info= json.loads(google_credentials)
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive"
 ]
 
-credentials = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=SCOPES)
+credentials = Credentials.from_service_account_info(info, scopes=SCOPES)
 
 client= gspread.authorize(credentials)
 
