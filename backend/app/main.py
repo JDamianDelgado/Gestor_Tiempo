@@ -16,9 +16,18 @@ import os
 load_dotenv()
 
 URL_FRONTEND=os.getenv("URL_FRONTEND")
+allowed_origins = [
+    origin.rstrip("/")
+    for origin in [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        URL_FRONTEND,
+    ]
+    if origin
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173",URL_FRONTEND],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
