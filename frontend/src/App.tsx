@@ -201,7 +201,7 @@ function LoginForm({
             />
           </label>
           {error && (
-            <p className="mb-4 rounded-lg bg-[#8d493f] px-3 py-2 text-sm">
+            <p className="notice-error mb-4 rounded-lg px-3 py-2 text-sm">
               {error}
             </p>
           )}
@@ -242,7 +242,7 @@ function PacienteSelector({
     <section className="ui-card rounded-2xl border border-[#dfd4d0] bg-[#fffdf9] p-5 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-[#8a4654]">
+          <p className="step-label text-xs font-bold uppercase tracking-widest">
             Paso 01
           </p>
           <h2 className="mt-1 text-xl font-semibold text-[#5b1f2a]">
@@ -322,7 +322,7 @@ function ActividadSelector({
     <section className="activity-panel ui-card rounded-2xl border border-[#d8dfdb] bg-[#fffdf9] p-5 shadow-sm">
       <div className="mb-5 flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-[#6e9076]">
+          <p className="step-label text-xs font-bold uppercase tracking-widest">
             Paso 02
           </p>
           <h2 className="mt-1 text-xl font-semibold text-[#193b31]">
@@ -414,7 +414,7 @@ function GestorTiempoForm({
     <section className="record-card rounded-2xl bg-[#5b1f2a] p-5 text-white shadow-lg md:p-6">
       <div className="mb-6 flex items-start justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-[#a6c9aa]">
+          <p className="step-label text-xs font-bold uppercase tracking-widest">
             Paso 03
           </p>
           <h2 className="mt-1 text-xl font-semibold">Registrar tiempo</h2>
@@ -623,7 +623,7 @@ function Dashboard({
       <div className="dashboard-content mx-auto max-w-6xl px-5 py-8 md:px-10 md:py-12">
         {canImportUsers && (importStatus || importError) && (
           <div
-            className={`mb-6 rounded-xl p-4 text-sm ${importError ? "bg-[#f6dfd8] text-[#863f36]" : "bg-[#dcebdd] text-[#315846]"}`}
+            className={`mb-6 rounded-xl p-4 text-sm ${importError ? "notice-error" : "notice-success"}`}
           >
             {importError || importStatus}
           </div>
@@ -645,9 +645,7 @@ function Dashboard({
           </div>
         )}
         {error && (
-          <div className="rounded-xl bg-[#f6dfd8] p-4 text-sm text-[#863f36]">
-            {error}
-          </div>
+          <div className="notice-error rounded-xl p-4 text-sm">{error}</div>
         )}
         {!loading && !error && (
           <div className="grid gap-5 lg:grid-cols-2">

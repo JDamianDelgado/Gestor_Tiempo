@@ -437,14 +437,301 @@ html.dark-mode .record-card input {
   background: #2b3b33 !important;
 }
 
-html.dark-mode .save-success {
-  background: #304b3a !important;
-  border-color: #587b63 !important;
-  color: #d4e7d8 !important;
+.notice-error,
+.notice-success {
+  border: 1px solid #b8ccca;
+  background: #e5eeeb;
+  color: #365c63;
 }
 
+/* Final two-tone theme: petrol blue and warm ivory. */
+.panel-grid {
+  background-image:
+    linear-gradient(rgba(54, 92, 99, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(54, 92, 99, 0.035) 1px, transparent 1px);
+  background-color: #f3f1ec !important;
+}
+
+.step-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid #cbd8d8;
+  border-radius: 999px;
+  background: #edf2f0;
+  color: #365c63 !important;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.ui-card,
+.activity-panel {
+  background: #fbfaf7 !important;
+  border-color: #d9dfdc !important;
+}
+
+.ui-card:hover {
+  border-color: #aebfc0 !important;
+}
+
+.activity-panel {
+  border-top-color: #365c63 !important;
+}
+
+.activity-category + .activity-category {
+  border-top-color: #e0e4e1 !important;
+}
+
+.activity-category-toggle,
+.activity-chevron,
+.activity-status,
+.activity-count {
+  color: #365c63 !important;
+}
+
+.activity-option {
+  background: #f5f4ef !important;
+  border-color: #dce3df !important;
+  color: #345057 !important;
+}
+
+.activity-option:hover,
+.activity-option.is-selected {
+  background: #e5eeeb !important;
+  border-color: #9eb7b8 !important;
+  color: #29464d !important;
+}
+
+.login-panel,
+.login-panel form {
+  background: #365c63 !important;
+}
+
+.login-panel > div:first-child {
+  background: #fbfaf7 !important;
+}
+
+.login-panel input {
+  background: #426a70 !important;
+  border-color: #83a2a3 !important;
+}
+
+.record-card {
+  background: #365c63 !important;
+  border-color: #416d72 !important;
+}
+
+.dashboard-content .record-card > div > div {
+  background: #416a70 !important;
+  border-color: rgba(239, 242, 237, 0.16) !important;
+}
+
+.record-card input {
+  background: #2e5158 !important;
+  border-color: #78989a !important;
+}
+
+.record-card button[type="submit"] {
+  background: #edf1eb !important;
+  color: #365c63 !important;
+}
+
+main:has(.dashboard-content),
+main:has(.dashboard-content) > header {
+  background-color: #f3f1ec !important;
+}
+
+main:has(.dashboard-content) > header {
+  background: rgba(251, 250, 247, 0.92) !important;
+  border-color: #d9dfdc !important;
+}
+
+main:has(.dashboard-content) > header button:not(.dark-toggle) {
+  background: #365c63 !important;
+  color: #f5f4ef !important;
+}
+
+.save-success,
+.save-error {
+  background: #e5eeeb !important;
+  border-color: #b8ccca !important;
+  color: #365c63 !important;
+}
+
+html.dark-mode,
+html.dark-mode body,
+html.dark-mode main,
+html.dark-mode .panel-grid {
+  background: #172326 !important;
+}
+
+html.dark-mode header,
+html.dark-mode .ui-card,
+html.dark-mode .activity-panel {
+  background: #223338 !important;
+  border-color: #3d5559 !important;
+}
+
+html.dark-mode .step-label {
+  background: #2b464b !important;
+  border-color: #577579 !important;
+  color: #dce8e4 !important;
+}
+
+html.dark-mode .activity-category + .activity-category {
+  border-top-color: #354c50 !important;
+}
+
+html.dark-mode .activity-category-toggle,
+html.dark-mode .activity-chevron,
+html.dark-mode .activity-status,
+html.dark-mode .activity-count {
+  color: #bdd3d1 !important;
+}
+
+html.dark-mode .activity-option {
+  background: #293e42 !important;
+  border-color: #405b5e !important;
+  color: #dce8e4 !important;
+}
+
+html.dark-mode .activity-option:hover,
+html.dark-mode .activity-option.is-selected {
+  background: #35585d !important;
+  border-color: #6f9698 !important;
+  color: #f1f3ed !important;
+}
+
+html.dark-mode .login-panel,
+html.dark-mode .login-panel form,
+html.dark-mode .record-card {
+  background: #29484e !important;
+  border-color: #42676b !important;
+}
+
+html.dark-mode .login-panel > div:first-child {
+  background: #223338 !important;
+}
+
+html.dark-mode .login-panel input,
+html.dark-mode .record-card input {
+  background: #203b40 !important;
+  border-color: #5c8082 !important;
+}
+
+html.dark-mode .dashboard-content .record-card > div > div {
+  background: #35585d !important;
+}
+
+html.dark-mode main:has(.dashboard-content) > header {
+  background: rgba(34, 51, 56, 0.95) !important;
+  border-color: #3d5559 !important;
+}
+
+html.dark-mode main:has(.dashboard-content) > header button:not(.dark-toggle) {
+  background: #416a70 !important;
+  color: #f1f3ed !important;
+}
+
+html.dark-mode .save-success,
 html.dark-mode .save-error {
-  background: #4b3532 !important;
-  border-color: #805b54 !important;
-  color: #f0d8d2 !important;
+  background: #2b464b !important;
+  border-color: #577579 !important;
+  color: #dce8e4 !important;
+}
+
+/* Keep dark mode strictly within charcoal and petrol blue. */
+html.dark-mode,
+html.dark-mode body,
+html.dark-mode #root,
+html.dark-mode main,
+html.dark-mode .panel-grid {
+  background-color: #172326 !important;
+  color: #dce8e4 !important;
+  border-color: #30464b !important;
+}
+
+html.dark-mode header,
+html.dark-mode section,
+html.dark-mode .ui-card,
+html.dark-mode .activity-panel,
+html.dark-mode .login-panel > div:first-child {
+  background-color: #223338 !important;
+  border-color: #3d5559 !important;
+}
+
+html.dark-mode .login-panel,
+html.dark-mode .login-panel form,
+html.dark-mode .record-card {
+  background-color: #29484e !important;
+  border-color: #42676b !important;
+}
+
+html.dark-mode .dashboard-content .record-card > div > div {
+  background-color: #35585d !important;
+  border-color: #527579 !important;
+}
+
+html.dark-mode input,
+html.dark-mode select,
+html.dark-mode .login-panel input,
+html.dark-mode .record-card input {
+  background-color: #203b40 !important;
+  border-color: #5c8082 !important;
+  color: #edf3ef !important;
+}
+
+html.dark-mode button:not(.dark-toggle),
+html.dark-mode main:has(.dashboard-content) > header button:not(.dark-toggle) {
+  background-color: #416a70 !important;
+  border-color: #5c8082 !important;
+  color: #edf3ef !important;
+}
+
+html.dark-mode button:not(.dark-toggle):hover {
+  background-color: #527b80 !important;
+}
+
+html.dark-mode .dark-toggle {
+  background-color: #dce8e4 !important;
+  border-color: #8ba8a9 !important;
+  color: #29484e !important;
+}
+
+html.dark-mode .activity-option {
+  background-color: #293e42 !important;
+  border-color: #405b5e !important;
+  color: #dce8e4 !important;
+}
+
+html.dark-mode .activity-option:hover,
+html.dark-mode .activity-option.is-selected {
+  background-color: #35585d !important;
+  border-color: #7b9da0 !important;
+  color: #edf3ef !important;
+}
+
+html.dark-mode .step-label {
+  background-color: #2b464b !important;
+  border-color: #577579 !important;
+  color: #c9ddda !important;
+}
+
+html.dark-mode .save-success,
+html.dark-mode .save-error,
+html.dark-mode .notice-success,
+html.dark-mode .notice-error {
+  background-color: #2b464b !important;
+  border-color: #577579 !important;
+  color: #dce8e4 !important;
+}
+
+html.dark-mode h1,
+html.dark-mode h2,
+html.dark-mode h3,
+html.dark-mode p,
+html.dark-mode label,
+html.dark-mode span {
+  color: #dce8e4 !important;
 }
