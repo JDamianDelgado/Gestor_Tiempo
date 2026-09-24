@@ -8,7 +8,10 @@ from app.google.sheets import obtener_pacientes
 #     return pacientes
 
 def lista_pacientes(db:Session):
-    pacientes= obtener_pacientes()
+    return filtrar_pacientes(obtener_pacientes())
+
+
+def filtrar_pacientes(pacientes):
     filtro =[]
     for i in pacientes:
         paciente=paciente_filtrado(

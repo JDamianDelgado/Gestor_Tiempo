@@ -5,6 +5,7 @@ from app.database.connection import SessionLocal
 from app.schemas.usuario import usuario_create, usuario_response, usuario_update
 from app.services.usuarios import crear_usuario, listar_usuarios,obtener_usuario_id,eliminar_user
 from app.google.importar_usuarios import importar_usuario_desde_sheet
+from app.auth.security import require_sheets_admin
 
 router = APIRouter(prefix='/usuarios',tags=['Usuarios'])
 
@@ -43,7 +44,7 @@ def eliminar_usuario(id_usuario:int, db:Session=Depends(get_db)):
     return eliminar_user(db,id_usuario)
 
 
-@router.post("/importar-sheets")
+@router.post("/importar-sheets", dependencies=[Depends(require_sheets_admin)])
 def importar_sheets_usuarios(db:Session= Depends(get_db)):
     resultado = importar_usuario_desde_sheet(db)
     return resultado 

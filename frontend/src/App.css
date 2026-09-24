@@ -1,8 +1,8 @@
 .panel-grid {
   background-image:
-    linear-gradient(rgba(123, 48, 64, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(123, 48, 64, 0.045) 1px, transparent 1px);
-  background-size: 36px 36px;
+    linear-gradient(rgba(116, 54, 64, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 54, 64, 0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
 }
 .fade-up {
   animation: fade-up 0.5s ease both;
@@ -23,31 +23,180 @@
 }
 
 .activity-option {
-  background: #f8f5ef;
-  color: #633843;
-  border: 1px solid transparent;
+  background: #fafbf9;
+  color: #365449;
+  border: 1px solid #e1e7e3;
+}
+
+.activity-panel {
+  border-top: 3px solid #6e9076;
+}
+
+.activity-count {
+  color: #6a7e74;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.activity-category + .activity-category {
+  border-top: 1px solid #e5eae7;
+}
+
+.activity-category-toggle {
+  transition: color 160ms ease;
+}
+
+.activity-category-toggle:hover {
+  color: #47715b;
+}
+
+.activity-chevron {
+  color: #6e9076;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.activity-options {
+  padding-left: 0.75rem;
 }
 
 .activity-option:hover,
 .activity-option.is-selected {
-  background: #f1e2e3;
-  border-color: #c9949d;
-  color: #5b1f2a;
+  background: #eef4ef;
+  border-color: #9bb5a1;
+  color: #244b3d;
+}
+
+.activity-status {
+  color: #47715b;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .record-card {
   box-shadow: 0 18px 42px rgba(91, 31, 42, 0.2);
 }
 
+/* Quiet red-and-white treatment for the application surfaces. */
+.login-panel {
+  background: #713640 !important;
+  box-shadow: 0 24px 60px rgba(61, 37, 40, 0.16) !important;
+}
+
+.login-panel > div:first-child {
+  background: #fbfaf8 !important;
+}
+
+.login-panel form {
+  background: #713640 !important;
+}
+
+.login-panel input {
+  background: #824751 !important;
+  border-color: #a8757d !important;
+  color: #fffaf9 !important;
+}
+
+.login-panel input::placeholder {
+  color: #d9bec1 !important;
+}
+
+.dashboard-content {
+  width: 100%;
+}
+
+main:has(.dashboard-content) {
+  background: #f4f2ef !important;
+}
+
+main:has(.dashboard-content) > header {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: #ded9d6 !important;
+}
+
+.dashboard-content .ui-card {
+  background: #fff !important;
+  border-color: #ded9d6 !important;
+  box-shadow: 0 10px 28px rgba(61, 37, 40, 0.06);
+}
+
+.dashboard-content .record-card {
+  background: #713640 !important;
+  box-shadow: 0 18px 42px rgba(91, 31, 42, 0.16);
+}
+
+.dashboard-content .record-card > div > div {
+  background: #834751 !important;
+}
+
+main:has(.dashboard-content) > header > div > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+button,
+input,
+select {
+  transition-duration: 160ms;
+}
+
 @media (max-width: 767px) {
   .login-panel {
     margin-top: 3rem;
+  }
+
+  #root {
+    border-inline: 0;
+  }
+
+  main:has(.dashboard-content) > header {
+    padding: 1rem;
+  }
+
+  main:has(.dashboard-content) > header > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  main:has(.dashboard-content) > header > div > div:last-child {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  main:has(.dashboard-content) > header button {
+    flex: 1 1 auto;
+    min-height: 2.6rem;
+    padding-inline: 0.7rem;
+  }
+
+  .dashboard-content {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .dashboard-content > div:first-child h2 {
+    font-size: 2.25rem;
+  }
+
+  .activity-count {
+    font-size: 0.62rem;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1100px) {
   .dashboard-content {
     padding-inline: 2rem;
+  }
+
+  main:has(.dashboard-content) > header > div {
+    gap: 1rem;
   }
 }
 @keyframes fade-up {
@@ -63,7 +212,7 @@
 
 html.dark-mode,
 html.dark-mode body {
-  background: #191417;
+  background: #1d1819;
   color: #eadfe0;
 }
 
@@ -72,13 +221,13 @@ html.dark-mode #root {
 }
 
 html.dark-mode main {
-  background-color: #191417 !important;
+  background-color: #1d1819 !important;
   color: #eadfe0 !important;
 }
 
 html.dark-mode header,
 html.dark-mode section {
-  background-color: #2a2024 !important;
+  background-color: #292123 !important;
   border-color: #4a353b !important;
 }
 
@@ -92,6 +241,20 @@ html.dark-mode .activity-option {
   color: #eadfe0 !important;
 }
 
+html.dark-mode .activity-panel {
+  border-top-color: #89a98f !important;
+}
+
+html.dark-mode .activity-category + .activity-category {
+  border-top-color: #4a353b;
+}
+
+html.dark-mode .activity-count,
+html.dark-mode .activity-chevron,
+html.dark-mode .activity-status {
+  color: #a6c9aa !important;
+}
+
 html.dark-mode .activity-option:hover,
 html.dark-mode .activity-option.is-selected {
   background: #633843 !important;
@@ -100,7 +263,24 @@ html.dark-mode .activity-option.is-selected {
 }
 
 html.dark-mode .record-card {
-  background: #41232d !important;
+  background: #48272e !important;
+}
+
+html.dark-mode .login-panel,
+html.dark-mode .login-panel form {
+  background: #48272e !important;
+}
+
+html.dark-mode .login-panel > div:first-child {
+  background: #292123 !important;
+}
+
+html.dark-mode main:has(.dashboard-content) {
+  background: #1d1819 !important;
+}
+
+html.dark-mode main:has(.dashboard-content) > header {
+  background: rgba(41, 33, 35, 0.94) !important;
 }
 
 html.dark-mode section div {

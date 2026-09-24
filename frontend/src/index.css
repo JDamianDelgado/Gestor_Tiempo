@@ -2,15 +2,15 @@
 @import "tailwindcss";
 
 :root {
-  --text: #73565d;
-  --text-h: #2e2327;
-  --bg: #f4f0e9;
-  --border: #dfd4d0;
-  --code-bg: #f4f3ec;
-  --accent: #7b3040;
-  --accent-bg: rgba(123, 48, 64, 0.1);
-  --accent-border: rgba(123, 48, 64, 0.5);
-  --social-bg: rgba(255, 253, 249, 0.7);
+  --text: #5f5556;
+  --text-h: #332b2c;
+  --bg: #f4f2ef;
+  --border: #ded9d6;
+  --code-bg: #eeece9;
+  --accent: #743640;
+  --accent-bg: rgba(116, 54, 64, 0.1);
+  --accent-border: rgba(116, 54, 64, 0.42);
+  --social-bg: rgba(255, 255, 255, 0.78);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
@@ -52,6 +52,7 @@
 body {
   margin: 0;
   min-width: 320px;
+  background: var(--bg);
 }
 
 button,

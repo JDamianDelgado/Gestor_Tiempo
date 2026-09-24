@@ -9,7 +9,7 @@ from app.schemas.pacientes import paciente_response, paciente_filtrado
 from dotenv import load_dotenv
 import os
 import json
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
 google_credentials= os.getenv("GOOGLE_CREDENTIALS_JSON")
 

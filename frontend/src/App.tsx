@@ -6,6 +6,7 @@ import "./App.css";
 const API_URL = import.meta.env.VITE_API_URL;
 const TOKEN_STORAGE_KEY = import.meta.env.VITE_TOKEN_KEY;
 const THEME_STORAGE_KEY = import.meta.env.VITE_THEME_KEY;
+const SHEETS_ADMIN_EMAIL = "joako@mail.com";
 
 const apiClient = axios.create({ baseURL: API_URL });
 
@@ -45,6 +46,17 @@ function getTokenSubject() {
   try {
     const payload = JSON.parse(atob(token.split(".")[1]));
     return Number(payload.sub);
+  } catch {
+    return null;
+  }
+}
+
+function getTokenEmail() {
+  const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return typeof payload.email === "string" ? payload.email : null;
   } catch {
     return null;
   }
@@ -115,7 +127,7 @@ function LoginForm({
         <div className="flex flex-col justify-between bg-[#f3eee5] p-8 md:p-12">
           <div>
             <p className="mb-12 text-sm font-bold uppercase tracking-[.22em] text-[#47715b]">
-              ALCLA / cuidado conectado
+              Tiempo cuidado conectado
             </p>
             <h1 className="max-w-sm text-5xl font-bold leading-[.96] tracking-[-.06em] text-[#5b1f2a] md:text-6xl">
               Tiempo que cuida.
@@ -291,44 +303,47 @@ function ActividadSelector({
     categorias[0]?.categoria || null,
   );
   return (
-    <section className="ui-card rounded-2xl border border-[#dfd4d0] bg-[#f3eee5] p-5 shadow-sm">
-      <div className="mb-4">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#8a4654]">
-          Paso 02
-        </p>
-        <h2 className="mt-1 text-xl font-semibold text-[#5b1f2a]">
-          Selecciona una actividad
-        </h2>
+    <section className="activity-panel ui-card rounded-2xl border border-[#d8dfdb] bg-[#fffdf9] p-5 shadow-sm">
+      <div className="mb-5 flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#6e9076]">
+            Paso 02
+          </p>
+          <h2 className="mt-1 text-xl font-semibold text-[#193b31]">
+            Selecciona una actividad
+          </h2>
+        </div>
+        <span className="activity-count">{categorias.length} categorías</span>
       </div>
-      <div className="divide-y divide-[#e8eee7]">
+      <div className="activity-list">
         {categorias.map((category) => (
-          <div key={category.categoria} className="py-1">
+          <div key={category.categoria} className="activity-category">
             <button
               type="button"
-              className="flex w-full items-center justify-between py-3 text-left font-semibold text-[#54232d]"
+              className="activity-category-toggle flex w-full items-center justify-between py-3 text-left font-semibold text-[#193b31]"
               onClick={() =>
                 setOpen(open === category.categoria ? null : category.categoria)
               }
             >
-              {category.categoria}
-              <span className="text-xl font-normal text-[#a77b83]">
+              <span>{category.categoria}</span>
+              <span className="activity-chevron" aria-hidden="true">
                 {open === category.categoria ? "−" : "+"}
               </span>
             </button>
             {open === category.categoria && (
-              <div className="mb-2 space-y-2">
+              <div className="activity-options mb-3 space-y-2">
                 {category.actividades.map((activity) => (
                   <button
                     type="button"
                     key={activity.nombre}
                     onClick={() => onSelect(activity)}
-                    className={`activity-option flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm transition ${selected?.nombre === activity.nombre ? "is-selected font-bold" : ""}`}
+                    className={`activity-option flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition ${selected?.nombre === activity.nombre ? "is-selected font-bold" : ""}`}
                   >
                     <span>{activity.nombre}</span>
-                    <span>
+                    <span className="activity-status">
                       {selected?.nombre === activity.nombre
-                        ? "✓"
-                        : "Seleccionar"}
+                        ? "Seleccionada"
+                        : ""}
                     </span>
                   </button>
                 ))}
@@ -470,6 +485,55 @@ function Dashboard({
     getTokenSubject() ? "" : "La sesión no contiene un usuario válido.",
   );
   const [loading, setLoading] = useState(() => Boolean(getTokenSubject()));
+  const [importStatus, setImportStatus] = useState("");
+  const [importError, setImportError] = useState("");
+  const [importing, setImporting] = useState(false);
+  const [syncingPatients, setSyncingPatients] = useState(false);
+  const canImportUsers = getTokenEmail()?.toLowerCase() === SHEETS_ADMIN_EMAIL;
+
+  async function importUsersFromSheets() {
+    setImportStatus("");
+    setImportError("");
+    setImporting(true);
+    try {
+      const result = await apiRequest("/usuarios/importar-sheets", {
+        method: "POST",
+      });
+      setImportStatus(
+        `Importación finalizada: ${result.importados} importados, ${result.duplicados} duplicados y ${result.invalidos} inválidos.`,
+      );
+    } catch (err) {
+      setImportError(
+        err instanceof Error ? err.message : "No se pudo importar usuarios.",
+      );
+    } finally {
+      setImporting(false);
+    }
+  }
+
+  async function syncPatientsFromSheets() {
+    setImportStatus("");
+    setImportError("");
+    setSyncingPatients(true);
+    try {
+      const patients = await apiRequest("/pacientes/sincronizar-sheets", {
+        method: "POST",
+      });
+      setPacientes(patients);
+      setPaciente(null);
+      setImportStatus(
+        `Pacientes sincronizados correctamente: ${patients.length}.`,
+      );
+    } catch (err) {
+      setImportError(
+        err instanceof Error
+          ? err.message
+          : "No se pudieron sincronizar los pacientes.",
+      );
+    } finally {
+      setSyncingPatients(false);
+    }
+  }
   useEffect(() => {
     const usuarioId = getTokenSubject();
     if (!usuarioId) return;
@@ -492,7 +556,7 @@ function Dashboard({
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <div>
             <p className="text-xs font-bold uppercase tracking-[.25em] text-[#6e9076]">
-              ALCLA / registro asistencial
+              Registro asistencial
             </p>
             <h1 className="mt-1 text-2xl font-bold tracking-tight text-[#193b31]">
               Gestor de tiempo
@@ -500,6 +564,28 @@ function Dashboard({
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle darkMode={darkMode} onToggle={onToggleTheme} />
+            {canImportUsers && (
+              <>
+                <button
+                  type="button"
+                  onClick={importUsersFromSheets}
+                  disabled={importing || syncingPatients}
+                  className="rounded-lg bg-[#47715b] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:bg-[#315846] disabled:cursor-wait disabled:opacity-60"
+                >
+                  {importing ? "Importando..." : "Importar usuarios"}
+                </button>
+                <button
+                  type="button"
+                  onClick={syncPatientsFromSheets}
+                  disabled={importing || syncingPatients}
+                  className="rounded-lg bg-[#315846] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:bg-[#244b3d] disabled:cursor-wait disabled:opacity-60"
+                >
+                  {syncingPatients
+                    ? "Sincronizando..."
+                    : "Sincronizar pacientes"}
+                </button>
+              </>
+            )}
             <button
               onClick={onLogout}
               className="rounded-lg bg-[#7b3040] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:bg-[#5b1f2a]"
@@ -510,6 +596,13 @@ function Dashboard({
         </div>
       </header>
       <div className="dashboard-content mx-auto max-w-6xl px-5 py-8 md:px-10 md:py-12">
+        {canImportUsers && (importStatus || importError) && (
+          <div
+            className={`mb-6 rounded-xl p-4 text-sm ${importError ? "bg-[#f6dfd8] text-[#863f36]" : "bg-[#dcebdd] text-[#315846]"}`}
+          >
+            {importError || importStatus}
+          </div>
+        )}
         <div className="mb-8 max-w-xl">
           <p className="mb-2 text-sm font-semibold text-[#6e9076]">
             Turno activo · hoy
