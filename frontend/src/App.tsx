@@ -40,7 +40,11 @@ function ThemeToggle({
   );
 }
 
-function getTokenPayload(): { sub?: string; email?: string } | null {
+function getTokenPayload(): {
+  sub?: string;
+  email?: string;
+  exp?: number;
+} | null {
   const token = localStorage.getItem(TOKEN_STORAGE_KEY);
   if (!token) return null;
   try {
@@ -64,6 +68,11 @@ function getTokenEmail() {
   return getTokenPayload()?.email || null;
 }
 
+function hasValidToken() {
+  const payload = getTokenPayload();
+  return Boolean(payload && (!payload.exp || payload.exp > Date.now() / 1000));
+}
+
 async function apiRequest(path: string, options: RequestInit = {}) {
   const headers = Object.fromEntries(new Headers(options.headers).entries());
   const token = localStorage.getItem(TOKEN_STORAGE_KEY);
@@ -79,6 +88,10 @@ async function apiRequest(path: string, options: RequestInit = {}) {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
+      if (error.response?.status === 401) {
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
+        window.dispatchEvent(new Event("auth-expired"));
+      }
       throw new Error(
         error.response?.data?.detail || "No se pudo completar la solicitud.",
         { cause: error },
@@ -656,9 +669,7 @@ function Dashboard({
 }
 
 export default function App() {
-  const [authenticated, setAuthenticated] = useState(
-    Boolean(localStorage.getItem(TOKEN_STORAGE_KEY)),
-  );
+  const [authenticated, setAuthenticated] = useState(hasValidToken());
   const [darkMode, setDarkMode] = useState(
     () => localStorage.getItem(THEME_STORAGE_KEY) === "true",
   );
@@ -666,6 +677,11 @@ export default function App() {
     document.documentElement.classList.toggle("dark-mode", darkMode);
     localStorage.setItem(THEME_STORAGE_KEY, String(darkMode));
   }, [darkMode]);
+  useEffect(() => {
+    const handleAuthExpired = () => setAuthenticated(false);
+    window.addEventListener("auth-expired", handleAuthExpired);
+    return () => window.removeEventListener("auth-expired", handleAuthExpired);
+  }, []);
   const toggleTheme = () => setDarkMode((current) => !current);
   return authenticated ? (
     <Dashboard

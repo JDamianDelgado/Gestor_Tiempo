@@ -1,6 +1,7 @@
 from pwdlib import PasswordHash
 import os 
 from pathlib import Path
+from datetime import datetime, timedelta, timezone
 
 import jwt
 from dotenv import load_dotenv
@@ -11,13 +12,15 @@ load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
 SECRET_KEY = os.getenv('JWT_SECRET_KEY')
 ALGORITHM= 'HS256'
+JWT_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRE_MINUTES", "60"))
 SHEETS_ADMIN_EMAIL = "joako@mail.com"
 bearer_scheme = HTTPBearer()
 
 def crear_token(usuario_id:int, email:str):
     payload= {
         "sub": str(usuario_id),
-        "email": email
+        "email": email,
+        "exp": datetime.now(timezone.utc) + timedelta(minutes=JWT_EXPIRE_MINUTES),
     }
 
     token= jwt.encode(
