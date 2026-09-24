@@ -312,3 +312,139 @@ html.dark-mode .dark-toggle {
   background-color: #f3eee5 !important;
   color: #5b1f2a !important;
 }
+
+/* Refined neutral surfaces and feedback states. */
+.ui-card,
+.record-card,
+.login-panel,
+.record-form-shell {
+  border-radius: 18px;
+}
+
+.ui-card {
+  padding: 1.5rem !important;
+  border-color: #d9dfdb !important;
+  box-shadow: 0 12px 28px rgba(49, 64, 57, 0.07) !important;
+}
+
+.ui-card:hover {
+  border-color: #b7c7bd !important;
+  box-shadow: 0 16px 34px rgba(49, 64, 57, 0.1) !important;
+}
+
+.record-card {
+  background: #465b51 !important;
+  border: 1px solid #536c60;
+  padding: 1.5rem !important;
+  box-shadow: 0 18px 38px rgba(49, 64, 57, 0.16) !important;
+}
+
+.dashboard-content .record-card > div > div {
+  background: #536a5f !important;
+  border: 1px solid rgba(220, 231, 224, 0.14);
+}
+
+.record-card input {
+  background: #3c5148 !important;
+  border-color: #71877b !important;
+}
+
+.record-card button[type="submit"] {
+  background: #e7ede8 !important;
+  color: #33483e !important;
+}
+
+.record-card button[type="submit"]:hover {
+  background: #f4f7f4 !important;
+}
+
+.record-form-shell {
+  scroll-margin-top: 1.5rem;
+}
+
+.save-success,
+.save-error {
+  animation: status-in 360ms ease both;
+}
+
+.save-success {
+  background: #dce9df;
+  color: #365647;
+  border: 1px solid #b9d0bf;
+}
+
+.save-error {
+  background: #eee0dc;
+  color: #754c46;
+  border: 1px solid #d9bbb4;
+}
+
+@keyframes status-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 767px) {
+  .ui-card,
+  .record-card {
+    padding: 1.15rem !important;
+    border-radius: 15px;
+  }
+
+  .record-card .flex.items-start {
+    gap: 0.75rem;
+  }
+
+  .record-card .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+html.dark-mode .ui-card {
+  background: #292f2c !important;
+  border-color: #46544d !important;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22) !important;
+}
+
+html.dark-mode .activity-option {
+  background: #303a35 !important;
+  border-color: #4b5b51 !important;
+}
+
+html.dark-mode .activity-option:hover,
+html.dark-mode .activity-option.is-selected {
+  background: #3f5c4d !important;
+  border-color: #7e9d89 !important;
+}
+
+html.dark-mode .record-card {
+  background: #34463d !important;
+  border-color: #526d5e !important;
+}
+
+html.dark-mode .dashboard-content .record-card > div > div {
+  background: #40584b !important;
+  border-color: rgba(220, 231, 224, 0.12) !important;
+}
+
+html.dark-mode .record-card input {
+  background: #2b3b33 !important;
+}
+
+html.dark-mode .save-success {
+  background: #304b3a !important;
+  border-color: #587b63 !important;
+  color: #d4e7d8 !important;
+}
+
+html.dark-mode .save-error {
+  background: #4b3532 !important;
+  border-color: #805b54 !important;
+  color: #f0d8d2 !important;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import axios from "axios";
 import "./App.css";
@@ -470,14 +470,12 @@ function GestorTiempoForm({
         </button>
       </form>
       {message && (
-        <p className="mt-4 rounded-lg bg-[#315846] px-3 py-2 text-sm text-[#d9e6d5]">
+        <p className="save-success mt-4 rounded-lg px-3 py-2 text-sm">
           {message}
         </p>
       )}
       {error && (
-        <p className="mt-4 rounded-lg bg-[#8d493f] px-3 py-2 text-sm">
-          {error}
-        </p>
+        <p className="save-error mt-4 rounded-lg px-3 py-2 text-sm">{error}</p>
       )}
     </section>
   );
@@ -505,7 +503,18 @@ function Dashboard({
   const [importError, setImportError] = useState("");
   const [importing, setImporting] = useState(false);
   const [syncingPatients, setSyncingPatients] = useState(false);
+  const recordFormRef = useRef<HTMLDivElement>(null);
   const canImportUsers = getTokenEmail()?.toLowerCase() === SHEETS_ADMIN_EMAIL;
+
+  function selectActivity(activity: Actividad) {
+    setActividad(activity);
+    requestAnimationFrame(() => {
+      recordFormRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    });
+  }
 
   async function importUsersFromSheets() {
     setImportStatus("");
@@ -650,10 +659,13 @@ function Dashboard({
             <ActividadSelector
               categorias={categorias}
               selected={actividad}
-              onSelect={setActividad}
+              onSelect={selectActivity}
             />
             {paciente && actividad && usuario && (
-              <div className="lg:col-span-2">
+              <div
+                ref={recordFormRef}
+                className="record-form-shell lg:col-span-2"
+              >
                 <GestorTiempoForm
                   paciente={paciente}
                   actividad={actividad}
