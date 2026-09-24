@@ -1,0 +1,134 @@
+.panel-grid {
+  background-image:
+    linear-gradient(rgba(123, 48, 64, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123, 48, 64, 0.045) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+.fade-up {
+  animation: fade-up 0.5s ease both;
+}
+
+.ui-card {
+  box-shadow: 0 12px 30px rgba(73, 39, 47, 0.07);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.ui-card:hover {
+  border-color: #b88992;
+  box-shadow: 0 16px 36px rgba(73, 39, 47, 0.11);
+  transform: translateY(-1px);
+}
+
+.activity-option {
+  background: #f8f5ef;
+  color: #633843;
+  border: 1px solid transparent;
+}
+
+.activity-option:hover,
+.activity-option.is-selected {
+  background: #f1e2e3;
+  border-color: #c9949d;
+  color: #5b1f2a;
+}
+
+.record-card {
+  box-shadow: 0 18px 42px rgba(91, 31, 42, 0.2);
+}
+
+@media (max-width: 767px) {
+  .login-panel {
+    margin-top: 3rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .dashboard-content {
+    padding-inline: 2rem;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html.dark-mode,
+html.dark-mode body {
+  background: #191417;
+  color: #eadfe0;
+}
+
+html.dark-mode #root {
+  border-color: #3c2b30;
+}
+
+html.dark-mode main {
+  background-color: #191417 !important;
+  color: #eadfe0 !important;
+}
+
+html.dark-mode header,
+html.dark-mode section {
+  background-color: #2a2024 !important;
+  border-color: #4a353b !important;
+}
+
+html.dark-mode .ui-card {
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+html.dark-mode .activity-option {
+  background: #33252b !important;
+  border-color: #4a353b !important;
+  color: #eadfe0 !important;
+}
+
+html.dark-mode .activity-option:hover,
+html.dark-mode .activity-option.is-selected {
+  background: #633843 !important;
+  border-color: #b88992 !important;
+  color: #fff7f2 !important;
+}
+
+html.dark-mode .record-card {
+  background: #41232d !important;
+}
+
+html.dark-mode section div {
+  background-color: #33252b !important;
+}
+
+html.dark-mode input,
+html.dark-mode select {
+  background-color: #33252b !important;
+  border-color: #76515a !important;
+  color: #fff7f2 !important;
+}
+
+html.dark-mode h1,
+html.dark-mode h2,
+html.dark-mode h3,
+html.dark-mode p,
+html.dark-mode label,
+html.dark-mode span {
+  color: #eadfe0 !important;
+}
+
+html.dark-mode button:not(.dark-toggle) {
+  background-color: #7b3040 !important;
+  color: #fff7f2 !important;
+}
+
+html.dark-mode .dark-toggle {
+  background-color: #f3eee5 !important;
+  color: #5b1f2a !important;
+}
