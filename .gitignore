@@ -4,3 +4,7 @@ __pycache__/
 *.pyc
 /credentials
 credentials/
+frontend/package-lock.json
+frontend/package.json
+package-lock.json
+package.json
