@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
+import axios from "axios";
 import "./App.css";
 
-const API_URL = (import.meta.env.VITE_API_URL || "/api").replace(/\/+$/, "");
-const TOKEN_STORAGE_KEY =
-  import.meta.env.VITE_TOKEN_KEY || "alcla_access_token";
-const THEME_STORAGE_KEY = import.meta.env.VITE_THEME_KEY || "alcla_dark_mode";
+const API_URL = import.meta.env.VITE_API_URL;
+const TOKEN_STORAGE_KEY = import.meta.env.VITE_TOKEN_KEY;
+const THEME_STORAGE_KEY = import.meta.env.VITE_THEME_KEY;
+
+const apiClient = axios.create({ baseURL: API_URL });
 
 type Paciente = {
   nombre_ingreso: string;
@@ -49,15 +51,27 @@ function getTokenSubject() {
 }
 
 async function apiRequest(path: string, options: RequestInit = {}) {
-  const headers = new Headers(options.headers);
-  headers.set("Content-Type", "application/json");
+  const headers = Object.fromEntries(new Headers(options.headers).entries());
   const token = localStorage.getItem(TOKEN_STORAGE_KEY);
-  if (token) headers.set("Authorization", `Bearer ${token}`);
-  const response = await fetch(`${API_URL}${path}`, { ...options, headers });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok)
-    throw new Error(data.detail || "No se pudo completar la solicitud.");
-  return data;
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  try {
+    const response = await apiClient.request({
+      url: path,
+      method: options.method || "GET",
+      headers,
+      data: options.body ? JSON.parse(String(options.body)) : undefined,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.detail || "No se pudo completar la solicitud.",
+        { cause: error },
+      );
+    }
+    throw error;
+  }
 }
 
 function LoginForm({
