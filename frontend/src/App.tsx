@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import "./App.css";
-
-const API_URL = import.meta.env.VITE_API_URL || "/api";
-const TOKEN_KEY = import.meta.env.VITE_TOKEN_KEY;
-const THEME_KEY = import.meta.env.VITE_THEME_KEY;
+import { API_URL, THEME_STORAGE_KEY, TOKEN_STORAGE_KEY } from "./config";
 
 type Paciente = {
   nombre_ingreso: string;
@@ -37,7 +34,7 @@ function ThemeToggle({
 }
 
 function getTokenSubject() {
-  const token = localStorage.getItem(TOKEN_KEY);
+  const token = localStorage.getItem(TOKEN_STORAGE_KEY);
   if (!token) return null;
   try {
     const payload = JSON.parse(atob(token.split(".")[1]));
@@ -50,7 +47,7 @@ function getTokenSubject() {
 async function apiRequest(path: string, options: RequestInit = {}) {
   const headers = new Headers(options.headers);
   headers.set("Content-Type", "application/json");
-  const token = localStorage.getItem(TOKEN_KEY);
+  const token = localStorage.getItem(TOKEN_STORAGE_KEY);
   if (token) headers.set("Authorization", `Bearer ${token}`);
   const response = await fetch(`${API_URL}${path}`, { ...options, headers });
   const data = await response.json().catch(() => ({}));
@@ -82,7 +79,7 @@ function LoginForm({
         method: "POST",
         body: JSON.stringify({ email, password: dni }),
       });
-      localStorage.setItem(TOKEN_KEY, data.access_token);
+      localStorage.setItem(TOKEN_STORAGE_KEY, data.access_token);
       onLogin();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error de autenticación.");
@@ -546,14 +543,14 @@ function Dashboard({
 
 export default function App() {
   const [authenticated, setAuthenticated] = useState(
-    Boolean(localStorage.getItem(TOKEN_KEY)),
+    Boolean(localStorage.getItem(TOKEN_STORAGE_KEY)),
   );
   const [darkMode, setDarkMode] = useState(
-    () => localStorage.getItem(THEME_KEY) === "true",
+    () => localStorage.getItem(THEME_STORAGE_KEY) === "true",
   );
   useEffect(() => {
     document.documentElement.classList.toggle("dark-mode", darkMode);
-    localStorage.setItem(THEME_KEY, String(darkMode));
+    localStorage.setItem(THEME_STORAGE_KEY, String(darkMode));
   }, [darkMode]);
   const toggleTheme = () => setDarkMode((current) => !current);
   return authenticated ? (
@@ -561,7 +558,7 @@ export default function App() {
       darkMode={darkMode}
       onToggleTheme={toggleTheme}
       onLogout={() => {
-        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
         setAuthenticated(false);
       }}
     />
