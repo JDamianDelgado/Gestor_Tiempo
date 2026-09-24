@@ -3,9 +3,9 @@ import type { FormEvent } from "react";
 import axios from "axios";
 import "./App.css";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = (import.meta.env.VITE_API_URL || "/api").replace(/\/+$/, "");
 const TOKEN_STORAGE_KEY = import.meta.env.VITE_TOKEN_KEY;
-const THEME_STORAGE_KEY = import.meta.env.VITE_THEME_KEY;
+const THEME_STORAGE_KEY = import.meta.env.VITE_THEME_KEY || "alcla_dark_mode";
 const SHEETS_ADMIN_EMAIL = "joako@mail.com";
 
 const apiClient = axios.create({ baseURL: API_URL });
@@ -40,26 +40,28 @@ function ThemeToggle({
   );
 }
 
-function getTokenSubject() {
+function getTokenPayload(): { sub?: string; email?: string } | null {
   const token = localStorage.getItem(TOKEN_STORAGE_KEY);
   if (!token) return null;
   try {
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    return Number(payload.sub);
+    const encodedPayload = token.split(".")[1];
+    const base64 = encodedPayload.replace(/-/g, "+").replace(/_/g, "/");
+    const payload = JSON.parse(
+      atob(base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), "=")),
+    );
+    return payload;
   } catch {
     return null;
   }
 }
 
+function getTokenSubject() {
+  const subject = getTokenPayload()?.sub;
+  return subject ? Number(subject) : null;
+}
+
 function getTokenEmail() {
-  const token = localStorage.getItem(TOKEN_STORAGE_KEY);
-  if (!token) return null;
-  try {
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    return typeof payload.email === "string" ? payload.email : null;
-  } catch {
-    return null;
-  }
+  return getTokenPayload()?.email || null;
 }
 
 async function apiRequest(path: string, options: RequestInit = {}) {
@@ -99,6 +101,7 @@ function LoginForm({
   const [dni, setDni] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  console.log(email, dni, error);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
