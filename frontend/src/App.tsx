@@ -21,6 +21,7 @@ type Actividad = { nombre: string };
 type Categoria = { categoria: string; actividades: Actividad[] };
 type Usuario = { id: number; nombre: string; apellido: string; email: string };
 
+
 function ThemeToggle({
   darkMode,
   onToggle,
@@ -28,7 +29,7 @@ function ThemeToggle({
   darkMode: boolean;
   onToggle: () => void;
 }) {
-  return (
+  return ({*
     <button
       type="button"
       onClick={onToggle}
@@ -36,7 +37,7 @@ function ThemeToggle({
       className="rounded-lg border border-[#a77b83] bg-[#fffdf9] px-3 py-2 text-sm font-bold text-[#5b1f2a] shadow-sm transition hover:bg-white dark-toggle"
     >
       {darkMode ? "☼ Claro" : "☾ Oscuro"}
-    </button>
+    </button>*}
   );
 }
 
