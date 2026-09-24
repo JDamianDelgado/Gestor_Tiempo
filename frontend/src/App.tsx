@@ -147,7 +147,7 @@ function LoginForm({
             />
           </label>
           <label className="mb-7 block text-sm text-[#d5e5d7]">
-            CONTASEÑA
+            CONTRASEÑA
             <input
               className="mt-2 w-full rounded-xl border border-[#a77b83] bg-[#713341] px-4 py-3.5 outline-none transition focus:border-[#f3eee5]"
               inputMode="numeric"
