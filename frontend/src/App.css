@@ -1,144 +1,154 @@
 .panel-grid {
+  background-color: var(--surface-page);
   background-image:
-    linear-gradient(rgba(116, 54, 64, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(116, 54, 64, 0.035) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 42px 42px;
 }
+
 .fade-up {
-  animation: fade-up 0.5s ease both;
+  animation: fade-up 0.4s ease both;
+}
+
+.ui-card,
+.record-card,
+.login-panel,
+.record-form-shell {
+  border-radius: 12px;
 }
 
 .ui-card {
-  box-shadow: 0 12px 30px rgba(73, 39, 47, 0.07);
+  border-color: var(--border) !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow) !important;
   transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .ui-card:hover {
-  border-color: #b88992;
-  box-shadow: 0 16px 36px rgba(73, 39, 47, 0.11);
-  transform: translateY(-1px);
+  border-color: var(--border-strong) !important;
+  box-shadow: var(--shadow-hover) !important;
 }
 
-.activity-option {
-  background: #fafbf9;
-  color: #365449;
-  border: 1px solid #e1e7e3;
-}
-
-.activity-panel {
-  border-top: 3px solid #6e9076;
-}
-
-.activity-count {
-  color: #6a7e74;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.activity-category + .activity-category {
-  border-top: 1px solid #e5eae7;
-}
-
-.activity-category-toggle {
-  transition: color 160ms ease;
-}
-
-.activity-category-toggle:hover {
-  color: #47715b;
-}
-
-.activity-chevron {
-  color: #6e9076;
-  font-size: 1.2rem;
-  font-weight: 400;
+.step-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text-muted) !important;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
   line-height: 1;
 }
 
-.activity-options {
-  padding-left: 0.75rem;
+.activity-panel {
+  border-top: 3px solid var(--accent) !important;
+}
+.activity-category + .activity-category {
+  border-top: 1px solid var(--border);
+}
+
+.activity-category-toggle,
+.activity-chevron,
+.activity-status,
+.activity-count {
+  color: var(--accent) !important;
+}
+
+.activity-count,
+.activity-status {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.activity-option {
+  border: 1px solid var(--border) !important;
+  background: var(--surface-muted) !important;
+  color: var(--text) !important;
 }
 
 .activity-option:hover,
 .activity-option.is-selected {
-  background: #eef4ef;
-  border-color: #9bb5a1;
-  color: #244b3d;
+  border-color: var(--accent) !important;
+  background: var(--accent-soft) !important;
+  color: var(--text-h) !important;
 }
 
-.activity-status {
-  color: #47715b;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.record-card {
-  box-shadow: 0 18px 42px rgba(91, 31, 42, 0.2);
-}
-
-/* Quiet red-and-white treatment for the application surfaces. */
 .login-panel {
-  background: #713640 !important;
-  box-shadow: 0 24px 60px rgba(61, 37, 40, 0.16) !important;
+  background: var(--surface-strong) !important;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.14) !important;
 }
 
 .login-panel > div:first-child {
-  background: #fbfaf8 !important;
+  background: var(--surface) !important;
 }
-
 .login-panel form {
-  background: #713640 !important;
+  background: var(--surface-strong) !important;
 }
 
-.login-panel input {
-  background: #824751 !important;
-  border-color: #a8757d !important;
-  color: #fffaf9 !important;
+.login-panel input,
+.record-card input {
+  border-color: var(--border-strong) !important;
+  background: var(--input) !important;
+  color: var(--text-inverse) !important;
 }
 
 .login-panel input::placeholder {
-  color: #d9bec1 !important;
+  color: var(--text-inverse-muted);
 }
 
-.dashboard-content {
-  width: 100%;
-}
-
-main:has(.dashboard-content) {
-  background: #f4f2ef !important;
-}
-
-main:has(.dashboard-content) > header {
-  background: rgba(255, 255, 255, 0.88) !important;
-  border-color: #ded9d6 !important;
-}
-
-.dashboard-content .ui-card {
-  background: #fff !important;
-  border-color: #ded9d6 !important;
-  box-shadow: 0 10px 28px rgba(61, 37, 40, 0.06);
-}
-
-.dashboard-content .record-card {
-  background: #713640 !important;
-  box-shadow: 0 18px 42px rgba(91, 31, 42, 0.16);
+.record-card {
+  border: 1px solid var(--border-strong);
+  background: var(--surface-strong) !important;
+  box-shadow: var(--shadow-strong) !important;
 }
 
 .dashboard-content .record-card > div > div {
-  background: #834751 !important;
+  border: 1px solid var(--border-inverse);
+  background: var(--surface-strong-muted) !important;
 }
 
-main:has(.dashboard-content) > header > div > div:last-child {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+.record-card button[type="submit"] {
+  background: var(--surface) !important;
+  color: var(--text-h) !important;
+}
+
+.record-card button[type="submit"]:hover {
+  background: var(--surface-muted) !important;
+}
+
+main:has(.dashboard-content),
+main:has(.dashboard-content) > header {
+  background-color: var(--surface-page) !important;
+}
+
+main:has(.dashboard-content) > header {
+  background: color-mix(in srgb, var(--surface) 94%, transparent) !important;
+  border-color: var(--border) !important;
+}
+
+main:has(.dashboard-content) > header button:not(.dark-toggle) {
+  background: var(--accent) !important;
+  color: var(--text-inverse) !important;
+}
+
+.notice-error,
+.save-error {
+  border: 1px solid var(--error-border);
+  background: var(--error-bg) !important;
+  color: var(--error-text) !important;
+}
+
+.notice-success,
+.save-success {
+  border: 1px solid var(--success-border);
+  background: var(--success-bg) !important;
+  color: var(--success-text) !important;
 }
 
 button,
@@ -147,62 +157,10 @@ select {
   transition-duration: 160ms;
 }
 
-@media (max-width: 767px) {
-  .login-panel {
-    margin-top: 3rem;
-  }
-
-  #root {
-    border-inline: 0;
-  }
-
-  main:has(.dashboard-content) > header {
-    padding: 1rem;
-  }
-
-  main:has(.dashboard-content) > header > div {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  main:has(.dashboard-content) > header > div > div:last-child {
-    justify-content: flex-start;
-    width: 100%;
-  }
-
-  main:has(.dashboard-content) > header button {
-    flex: 1 1 auto;
-    min-height: 2.6rem;
-    padding-inline: 0.7rem;
-  }
-
-  .dashboard-content {
-    padding: 1.5rem 1rem !important;
-  }
-
-  .dashboard-content > div:first-child h2 {
-    font-size: 2.25rem;
-  }
-
-  .activity-count {
-    font-size: 0.62rem;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1100px) {
-  .dashboard-content {
-    padding-inline: 2rem;
-  }
-
-  main:has(.dashboard-content) > header > div {
-    gap: 1rem;
-  }
-}
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -210,528 +168,117 @@ select {
   }
 }
 
-html.dark-mode,
-html.dark-mode body {
-  background: #1d1819;
-  color: #eadfe0;
+html.dark-mode {
+  color-scheme: dark;
 }
 
-html.dark-mode #root {
-  border-color: #3c2b30;
+html.dark-mode .login-panel,
+html.dark-mode .login-panel form,
+html.dark-mode .record-card {
+  background: var(--surface-strong) !important;
 }
 
-html.dark-mode main {
-  background-color: #1d1819 !important;
-  color: #eadfe0 !important;
-}
-
-html.dark-mode header,
-html.dark-mode section {
-  background-color: #292123 !important;
-  border-color: #4a353b !important;
-}
-
-html.dark-mode .ui-card {
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+html.dark-mode .login-panel > div:first-child,
+html.dark-mode .ui-card,
+html.dark-mode .activity-panel,
+html.dark-mode header {
+  background: var(--surface) !important;
 }
 
 html.dark-mode .activity-option {
-  background: #33252b !important;
-  border-color: #4a353b !important;
-  color: #eadfe0 !important;
-}
-
-html.dark-mode .activity-panel {
-  border-top-color: #89a98f !important;
-}
-
-html.dark-mode .activity-category + .activity-category {
-  border-top-color: #4a353b;
-}
-
-html.dark-mode .activity-count,
-html.dark-mode .activity-chevron,
-html.dark-mode .activity-status {
-  color: #a6c9aa !important;
+  background: var(--surface-muted) !important;
 }
 
 html.dark-mode .activity-option:hover,
 html.dark-mode .activity-option.is-selected {
-  background: #633843 !important;
-  border-color: #b88992 !important;
-  color: #fff7f2 !important;
-}
-
-html.dark-mode .record-card {
-  background: #48272e !important;
-}
-
-html.dark-mode .login-panel,
-html.dark-mode .login-panel form {
-  background: #48272e !important;
-}
-
-html.dark-mode .login-panel > div:first-child {
-  background: #292123 !important;
-}
-
-html.dark-mode main:has(.dashboard-content) {
-  background: #1d1819 !important;
-}
-
-html.dark-mode main:has(.dashboard-content) > header {
-  background: rgba(41, 33, 35, 0.94) !important;
-}
-
-html.dark-mode section div {
-  background-color: #33252b !important;
-}
-
-html.dark-mode input,
-html.dark-mode select {
-  background-color: #33252b !important;
-  border-color: #76515a !important;
-  color: #fff7f2 !important;
-}
-
-html.dark-mode h1,
-html.dark-mode h2,
-html.dark-mode h3,
-html.dark-mode p,
-html.dark-mode label,
-html.dark-mode span {
-  color: #eadfe0 !important;
-}
-
-html.dark-mode button:not(.dark-toggle) {
-  background-color: #7b3040 !important;
-  color: #fff7f2 !important;
+  background: var(--accent-soft) !important;
 }
 
 html.dark-mode .dark-toggle {
-  background-color: #f3eee5 !important;
-  color: #5b1f2a !important;
-}
-
-/* Refined neutral surfaces and feedback states. */
-.ui-card,
-.record-card,
-.login-panel,
-.record-form-shell {
-  border-radius: 18px;
-}
-
-.ui-card {
-  padding: 1.5rem !important;
-  border-color: #d9dfdb !important;
-  box-shadow: 0 12px 28px rgba(49, 64, 57, 0.07) !important;
-}
-
-.ui-card:hover {
-  border-color: #b7c7bd !important;
-  box-shadow: 0 16px 34px rgba(49, 64, 57, 0.1) !important;
-}
-
-.record-card {
-  background: #465b51 !important;
-  border: 1px solid #536c60;
-  padding: 1.5rem !important;
-  box-shadow: 0 18px 38px rgba(49, 64, 57, 0.16) !important;
-}
-
-.dashboard-content .record-card > div > div {
-  background: #536a5f !important;
-  border: 1px solid rgba(220, 231, 224, 0.14);
-}
-
-.record-card input {
-  background: #3c5148 !important;
-  border-color: #71877b !important;
-}
-
-.record-card button[type="submit"] {
-  background: #e7ede8 !important;
-  color: #33483e !important;
-}
-
-.record-card button[type="submit"]:hover {
-  background: #f4f7f4 !important;
-}
-
-.record-form-shell {
-  scroll-margin-top: 1.5rem;
-}
-
-.save-success,
-.save-error {
-  animation: status-in 360ms ease both;
-}
-
-.save-success {
-  background: #dce9df;
-  color: #365647;
-  border: 1px solid #b9d0bf;
-}
-
-.save-error {
-  background: #eee0dc;
-  color: #754c46;
-  border: 1px solid #d9bbb4;
-}
-
-@keyframes status-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@media (max-width: 767px) {
-  .ui-card,
-  .record-card {
-    padding: 1.15rem !important;
-    border-radius: 15px;
-  }
-
-  .record-card .flex.items-start {
-    gap: 0.75rem;
-  }
-
-  .record-card .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-html.dark-mode .ui-card {
-  background: #292f2c !important;
-  border-color: #46544d !important;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22) !important;
-}
-
-html.dark-mode .activity-option {
-  background: #303a35 !important;
-  border-color: #4b5b51 !important;
-}
-
-html.dark-mode .activity-option:hover,
-html.dark-mode .activity-option.is-selected {
-  background: #3f5c4d !important;
-  border-color: #7e9d89 !important;
-}
-
-html.dark-mode .record-card {
-  background: #34463d !important;
-  border-color: #526d5e !important;
-}
-
-html.dark-mode .dashboard-content .record-card > div > div {
-  background: #40584b !important;
-  border-color: rgba(220, 231, 224, 0.12) !important;
-}
-
-html.dark-mode .record-card input {
-  background: #2b3b33 !important;
-}
-
-.notice-error,
-.notice-success {
-  border: 1px solid #b8ccca;
-  background: #e5eeeb;
-  color: #365c63;
-}
-
-/* Final two-tone theme: petrol blue and warm ivory. */
-.panel-grid {
-  background-image:
-    linear-gradient(rgba(54, 92, 99, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(54, 92, 99, 0.035) 1px, transparent 1px);
-  background-color: #f3f1ec !important;
-}
-
-.step-label {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.35rem 0.7rem;
-  border: 1px solid #cbd8d8;
-  border-radius: 999px;
-  background: #edf2f0;
-  color: #365c63 !important;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  line-height: 1;
-}
-
-.ui-card,
-.activity-panel {
-  background: #fbfaf7 !important;
-  border-color: #d9dfdc !important;
-}
-
-.ui-card:hover {
-  border-color: #aebfc0 !important;
-}
-
-.activity-panel {
-  border-top-color: #365c63 !important;
-}
-
-.activity-category + .activity-category {
-  border-top-color: #e0e4e1 !important;
-}
-
-.activity-category-toggle,
-.activity-chevron,
-.activity-status,
-.activity-count {
-  color: #365c63 !important;
-}
-
-.activity-option {
-  background: #f5f4ef !important;
-  border-color: #dce3df !important;
-  color: #345057 !important;
-}
-
-.activity-option:hover,
-.activity-option.is-selected {
-  background: #e5eeeb !important;
-  border-color: #9eb7b8 !important;
-  color: #29464d !important;
-}
-
-.login-panel,
-.login-panel form {
-  background: #365c63 !important;
-}
-
-.login-panel > div:first-child {
-  background: #fbfaf7 !important;
-}
-
-.login-panel input {
-  background: #426a70 !important;
-  border-color: #83a2a3 !important;
-}
-
-.record-card {
-  background: #365c63 !important;
-  border-color: #416d72 !important;
-}
-
-.dashboard-content .record-card > div > div {
-  background: #416a70 !important;
-  border-color: rgba(239, 242, 237, 0.16) !important;
-}
-
-.record-card input {
-  background: #2e5158 !important;
-  border-color: #78989a !important;
-}
-
-.record-card button[type="submit"] {
-  background: #edf1eb !important;
-  color: #365c63 !important;
-}
-
-main:has(.dashboard-content),
-main:has(.dashboard-content) > header {
-  background-color: #f3f1ec !important;
-}
-
-main:has(.dashboard-content) > header {
-  background: rgba(251, 250, 247, 0.92) !important;
-  border-color: #d9dfdc !important;
-}
-
-main:has(.dashboard-content) > header button:not(.dark-toggle) {
-  background: #365c63 !important;
-  color: #f5f4ef !important;
-}
-
-.save-success,
-.save-error {
-  background: #e5eeeb !important;
-  border-color: #b8ccca !important;
-  color: #365c63 !important;
-}
-
-html.dark-mode,
-html.dark-mode body,
-html.dark-mode main,
-html.dark-mode .panel-grid {
-  background: #172326 !important;
-}
-
-html.dark-mode header,
-html.dark-mode .ui-card,
-html.dark-mode .activity-panel {
-  background: #223338 !important;
-  border-color: #3d5559 !important;
-}
-
-html.dark-mode .step-label {
-  background: #2b464b !important;
-  border-color: #577579 !important;
-  color: #dce8e4 !important;
-}
-
-html.dark-mode .activity-category + .activity-category {
-  border-top-color: #354c50 !important;
-}
-
-html.dark-mode .activity-category-toggle,
-html.dark-mode .activity-chevron,
-html.dark-mode .activity-status,
-html.dark-mode .activity-count {
-  color: #bdd3d1 !important;
-}
-
-html.dark-mode .activity-option {
-  background: #293e42 !important;
-  border-color: #405b5e !important;
-  color: #dce8e4 !important;
-}
-
-html.dark-mode .activity-option:hover,
-html.dark-mode .activity-option.is-selected {
-  background: #35585d !important;
-  border-color: #6f9698 !important;
-  color: #f1f3ed !important;
-}
-
-html.dark-mode .login-panel,
-html.dark-mode .login-panel form,
-html.dark-mode .record-card {
-  background: #29484e !important;
-  border-color: #42676b !important;
-}
-
-html.dark-mode .login-panel > div:first-child {
-  background: #223338 !important;
-}
-
-html.dark-mode .login-panel input,
-html.dark-mode .record-card input {
-  background: #203b40 !important;
-  border-color: #5c8082 !important;
-}
-
-html.dark-mode .dashboard-content .record-card > div > div {
-  background: #35585d !important;
-}
-
-html.dark-mode main:has(.dashboard-content) > header {
-  background: rgba(34, 51, 56, 0.95) !important;
-  border-color: #3d5559 !important;
-}
-
-html.dark-mode main:has(.dashboard-content) > header button:not(.dark-toggle) {
-  background: #416a70 !important;
-  color: #f1f3ed !important;
-}
-
-html.dark-mode .save-success,
-html.dark-mode .save-error {
-  background: #2b464b !important;
-  border-color: #577579 !important;
-  color: #dce8e4 !important;
-}
-
-/* Keep dark mode strictly within charcoal and petrol blue. */
-html.dark-mode,
-html.dark-mode body,
-html.dark-mode #root,
-html.dark-mode main,
-html.dark-mode .panel-grid {
-  background-color: #172326 !important;
-  color: #dce8e4 !important;
-  border-color: #30464b !important;
-}
-
-html.dark-mode header,
-html.dark-mode section,
-html.dark-mode .ui-card,
-html.dark-mode .activity-panel,
-html.dark-mode .login-panel > div:first-child {
-  background-color: #223338 !important;
-  border-color: #3d5559 !important;
-}
-
-html.dark-mode .login-panel,
-html.dark-mode .login-panel form,
-html.dark-mode .record-card {
-  background-color: #29484e !important;
-  border-color: #42676b !important;
-}
-
-html.dark-mode .dashboard-content .record-card > div > div {
-  background-color: #35585d !important;
-  border-color: #527579 !important;
+  background: var(--surface) !important;
+  color: var(--text-h) !important;
 }
 
 html.dark-mode input,
 html.dark-mode select,
 html.dark-mode .login-panel input,
 html.dark-mode .record-card input {
-  background-color: #203b40 !important;
-  border-color: #5c8082 !important;
-  color: #edf3ef !important;
+  background: var(--input) !important;
+  color: var(--text-inverse) !important;
 }
 
-html.dark-mode button:not(.dark-toggle),
-html.dark-mode main:has(.dashboard-content) > header button:not(.dark-toggle) {
-  background-color: #416a70 !important;
-  border-color: #5c8082 !important;
-  color: #edf3ef !important;
+.login-panel > div:first-child h1,
+.login-panel > div:first-child p,
+.login-panel > div:first-child span,
+.login-panel form h2,
+.login-panel form p,
+.login-panel form label {
+  color: inherit;
 }
 
-html.dark-mode button:not(.dark-toggle):hover {
-  background-color: #527b80 !important;
+.login-panel > div:first-child h1 {
+  color: var(--text-h) !important;
+}
+.login-panel > div:first-child p,
+.login-panel > div:first-child span {
+  color: var(--text-muted) !important;
+}
+.login-panel form p,
+.login-panel form label {
+  color: var(--text-inverse-muted) !important;
+}
+.login-panel form h2 {
+  color: var(--text-inverse) !important;
 }
 
-html.dark-mode .dark-toggle {
-  background-color: #dce8e4 !important;
-  border-color: #8ba8a9 !important;
-  color: #29484e !important;
+main:has(.dashboard-content) > header h1,
+main:has(.dashboard-content) > header p,
+.dashboard-content > div:first-child h2,
+.dashboard-content > div:first-child p {
+  color: var(--text-h) !important;
 }
 
-html.dark-mode .activity-option {
-  background-color: #293e42 !important;
-  border-color: #405b5e !important;
-  color: #dce8e4 !important;
+.dashboard-content > div:first-child p {
+  color: var(--text-muted) !important;
 }
 
-html.dark-mode .activity-option:hover,
-html.dark-mode .activity-option.is-selected {
-  background-color: #35585d !important;
-  border-color: #7b9da0 !important;
-  color: #edf3ef !important;
+@media (max-width: 767px) {
+  .login-panel {
+    margin-top: 3rem;
+  }
+  #root {
+    border-inline: 0;
+  }
+  main:has(.dashboard-content) > header {
+    padding: 1rem;
+  }
+  main:has(.dashboard-content) > header > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  main:has(.dashboard-content) > header > div > div:last-child {
+    justify-content: flex-start;
+    width: 100%;
+  }
+  main:has(.dashboard-content) > header button {
+    flex: 1 1 auto;
+    min-height: 2.6rem;
+    padding-inline: 0.7rem;
+  }
+  .dashboard-content {
+    padding: 1.5rem 1rem !important;
+  }
+  .dashboard-content > div:first-child h2 {
+    font-size: 2.25rem;
+  }
 }
 
-html.dark-mode .step-label {
-  background-color: #2b464b !important;
-  border-color: #577579 !important;
-  color: #c9ddda !important;
-}
-
-html.dark-mode .save-success,
-html.dark-mode .save-error,
-html.dark-mode .notice-success,
-html.dark-mode .notice-error {
-  background-color: #2b464b !important;
-  border-color: #577579 !important;
-  color: #dce8e4 !important;
-}
-
-html.dark-mode h1,
-html.dark-mode h2,
-html.dark-mode h3,
-html.dark-mode p,
-html.dark-mode label,
-html.dark-mode span {
-  color: #dce8e4 !important;
+@media (min-width: 768px) and (max-width: 1100px) {
+  .dashboard-content {
+    padding-inline: 2rem;
+  }
+  main:has(.dashboard-content) > header > div {
+    gap: 1rem;
+  }
 }

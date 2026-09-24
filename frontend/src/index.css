@@ -2,17 +2,33 @@
 @import "tailwindcss";
 
 :root {
-  --text: #526467;
-  --text-h: #29464d;
-  --bg: #f3f1ec;
-  --border: #d9dfdc;
-  --code-bg: #e9eeea;
-  --accent: #365c63;
-  --accent-bg: rgba(54, 92, 99, 0.1);
-  --accent-border: rgba(54, 92, 99, 0.42);
-  --social-bg: rgba(255, 255, 255, 0.78);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --text: #475569;
+  --text-h: #172033;
+  --text-inverse: #f8fafc;
+  --text-inverse-muted: #cbd5e1;
+  --text-muted: #64748b;
+  --surface-page: #f1f5f9;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-strong: #1e293b;
+  --surface-strong-muted: #334155;
+  --input: #273449;
+  --code-bg: #e2e8f0;
+  --border: #dbe3ec;
+  --border-strong: #94a3b8;
+  --border-inverse: rgba(226, 232, 240, 0.16);
+  --accent: #3f6475;
+  --accent-soft: #e5eef2;
+  --grid-line: rgba(100, 116, 139, 0.08);
+  --shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 14px 30px rgba(15, 23, 42, 0.1);
+  --shadow-strong: 0 18px 38px rgba(15, 23, 42, 0.16);
+  --error-bg: #fef2f2;
+  --error-border: #fecaca;
+  --error-text: #991b1b;
+  --success-bg: #f0fdf4;
+  --success-border: #bbf7d0;
+  --success-text: #166534;
 
   --sans: "DM Sans", sans-serif;
   --heading: "Space Grotesk", sans-serif;
@@ -22,7 +38,7 @@
   letter-spacing: 0.18px;
   color-scheme: light;
   color: var(--text);
-  background: var(--bg);
+  background: var(--surface-page);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -103,4 +119,27 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+html.dark-mode {
+  --text: #cbd5e1;
+  --text-h: #f8fafc;
+  --surface-page: #0f172a;
+  --surface: #1e293b;
+  --surface-muted: #273449;
+  --surface-strong: #172033;
+  --surface-strong-muted: #243247;
+  --input: #111827;
+  --code-bg: #1e293b;
+  --border: #334155;
+  --border-strong: #64748b;
+  --accent: #9bb8c4;
+  --accent-soft: #29404b;
+  --grid-line: rgba(148, 163, 184, 0.08);
+  --error-bg: #451a1a;
+  --error-border: #7f1d1d;
+  --error-text: #fecaca;
+  --success-bg: #143425;
+  --success-border: #166534;
+  --success-text: #bbf7d0;
 }
